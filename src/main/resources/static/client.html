@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-messaging.js"></script>
+
+
+    <script>
+        let firebaseConfig = {
+            apiKey: "AIzaSyDAQr6dk0fo9y7XxuFSjrXV4tijHoCggyk",
+            authDomain: "fir-poc-83d41.firebaseapp.com",
+            projectId: "fir-poc-83d41",
+            storageBucket: "fir-poc-83d41.appspot.com",
+            messagingSenderId: "486358425051",
+            appId: "1:486358425051:web:b1366ffd272ea3b049dbfe",
+            measurementId: "G-GLP10C4BLJ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+
+        messaging.getToken({vapidKey: 'BLpM2a-8zpA1SMkZVdgemR7FxFagbjJlI90xGYLvnXIfFedCbeT416-IEXpzXJqzd83IJL7kxzGmABsKNsJX3Tw'}).then((currentToken) => {
+            console.log('currentToken', currentToken);
+        }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+        });
+
+        messaging.onMessage((payload) => {
+            console.log('Message received. ', payload);
+            document.getElementById("demo").innerHTML = payload.notification.body;
+        });
+    </script>
+
+
+</head>
+<body>
+
+<p id="demo"></p>
+
+</body>
+</html>
